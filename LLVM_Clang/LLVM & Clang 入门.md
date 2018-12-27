@@ -95,7 +95,7 @@
 
 4. 编译，选择`ALL_BUILD` Secheme 进行编译，预计`1+`小时。
 
-    ![All_BUILD](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/llvm_clang_all_build.png)    
+    ![All_BUILD](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/llvm_clang_all_build.png) 
 
 ## <span id="clang_three">Clang 三大件</span>
 
@@ -503,4 +503,7 @@ static FrontendPluginRegistry::Add<QTPlugin::QTASTAction> X("QTPlugin", "The QTP
 * [LLVM每日谈](https://zhuanlan.zhihu.com/llvm-clang)
 
 如有内容错误，欢迎 [issue](https://github.com/CYBoys/Blogs/issues/new) 指正。
+
+**转载请注明出处！**
+
 
