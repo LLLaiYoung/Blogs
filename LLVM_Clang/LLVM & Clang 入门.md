@@ -14,6 +14,8 @@
 
 [编写插件（实战）](#code_plugin)
 
+[Xcode 集成 Plugin](#xcode_integrated_plugin)
+
 ## <span id="overview">概述</span>
 
 `LLVM`包含三部分，分别是`LLVM suite`、`Clang`和`Test Suite`。
@@ -379,6 +381,8 @@ public:
             
             if (propertyDecl->getTypeSourceInfo() && isShouldUseCopy(typeStr) && !(attrKind & ObjCPropertyDecl::OBJC_PR_copy)) {
                 cout<<"--------- "<<typeStr<<": 不是使用的 copy 修饰--------"<<endl;
+                DiagnosticsEngine &diag = CI.getDiagnostics();
+                diag.Report(propertyDecl->getBeginLoc(), diag.getCustomDiagID(DiagnosticsEngine::Warning, "--------- %0 不是使用的 copy 修饰--------")) << typeStr;
             }
         }
     }
@@ -436,6 +440,8 @@ namespace QTPlugin {
                 
                 if (propertyDecl->getTypeSourceInfo() && isShouldUseCopy(typeStr) && !(attrKind & ObjCPropertyDecl::OBJC_PR_copy)) {
                     cout<<"--------- "<<typeStr<<": 不是使用的 copy 修饰--------"<<endl;
+                    DiagnosticsEngine &diag = CI.getDiagnostics();
+                    diag.Report(propertyDecl->getBeginLoc(), diag.getCustomDiagID(DiagnosticsEngine::Warning, "--------- %0 不是使用的 copy 修饰--------")) << typeStr;
                 }
             }
         }
@@ -486,7 +492,47 @@ static FrontendPluginRegistry::Add<QTPlugin::QTASTAction> X("QTPlugin", "The QTP
 
 输出结果：
 
-![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/clang_ouput.png)
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/terminal_console_log.png)
+
+## <span id="xcode_integrated_plugin">Xcode 集成 Plugin </span>
+
+#### 加载插件：
+
+打开需要加载插件的`Xcode`项目，在`Build Settings`栏目中的`OTHER_CFLAGS`添加上如下内容：
+
+ ```
+-Xclang -load -Xclang (.dylib)动态库路径 -Xclang -add-plugin -Xclang 插件名字（namespace 的名字，名字不对则无法使用插件）
+ ```
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_other_cflags.png)
+
+#### 设置编译器：
+
+由于`Clang`插件需要使用对应的版本去加载，如果版本不一致则会导致编译错误，会出现如下图所示：
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_compiler_error.png)
+
+在`Build Settings`栏目中新增两项用户定义的设置
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_add_user_defined_settings.png)
+
+分别是`CC`和`CXX`。
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_added_user_defined_cc_cxx.png)
+
+`CC`对应的是自己编译的`clang`的绝对路径，`CXX`对应的是自己编译的`clang++`的绝对路径。
+
+如果👆的步骤都确认无误之后，在编译的时候如果遇到了下图这种错误
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_index_store_path_error.png)
+
+则可以在`Build Settings`栏目中搜索`index`，将`Enable Index-Wihle-Building Functionality`的`Default`改为`NO`。
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_enable_index_wihle_building_functionality_no.png)
+
+#### 最终效果：
+
+![](https://raw.githubusercontent.com/CYBoys/Blogs/master/Pic/xcode_load_plugin_result.png)
 
 **参考文章**：
 
@@ -496,6 +542,7 @@ static FrontendPluginRegistry::Add<QTPlugin::QTASTAction> X("QTPlugin", "The QTP
 * [Clang Tutorial 第三部分(Plugin)](http://jszhujun2010.farbox.com/post/llvm&clang/clang-tutorial-di-san-bu-fen)
 * [Clang之语法抽象语法树AST](http://www.cnblogs.com/zhangke007/p/4714245.html)
 * [LLVM与Clang的一些事儿](https://juejin.im/post/5a30ea0ff265da43094526f9)
+* [使用Xcode开发iOS语法检查的Clang插件](https://www.jianshu.com/p/581ef614a1c5)
 
 **推荐文章**：
 
