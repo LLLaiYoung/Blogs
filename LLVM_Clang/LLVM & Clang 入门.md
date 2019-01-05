@@ -536,6 +536,7 @@ static FrontendPluginRegistry::Add<QTPlugin::QTASTAction> X("QTPlugin", "The QTP
 
 **参考文章**：
 
+* [Clang Plugin 之 Debug](https://github.com/CYBoys/Blogs/blob/master/LLVM_Clang/Clang%20Plugin%20%E4%B9%8B%20Debug.md)
 * [Clang 之旅--实现一个自定义检查规范的 Clang 插件](https://www.jianshu.com/p/c27b77f70616)
 * [基于LLVM开发属于自己Xcode的Clang插件](https://www.jianshu.com/p/4935e919bb45)
 * [Clang Tutorial 第二部分(LibTooling)](http://jszhujun2010.farbox.com/post/llvm&clang/clang-tutorial-di-er-bu-fen)
