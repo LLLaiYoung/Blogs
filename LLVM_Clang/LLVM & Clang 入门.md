@@ -551,6 +551,8 @@ static FrontendPluginRegistry::Add<QTPlugin::QTASTAction> X("QTPlugin", "The QTP
 
 如有内容错误，欢迎 [issue](https://github.com/CYBoys/Blogs/issues/new) 指正。
 
+**[Example](https://github.com/CYBoys/Blogs/tree/master/LLVM_Clang/Examples/QTPlugin)**
+
 **转载请注明出处！**
 
 
