@@ -206,7 +206,8 @@ int main(int argc, const char **argv) {
 **参数解释**：
 
 > 上面在`--`后面的参数，是传递给`CI`的`Compilation DataBase`的，而不是这个命令行工具本身的。比如我们的`ViewController.m`，因为有`#import <UIKit/UIKit.h>`这么一条语句，以及继承了`UIViewController`，那么语法分析器(Sema)读到这里的时候就需要知道`UIViewController`的定义是从哪里来的，换句话说就是它需要找到定义`UIViewController`的地方。怎么找呢？通过指定的`-I`、`-F`这些参数指定的目录来寻找。`--`后面的参数，可以理解为如果你要编译`ViewController.m`需要什么参数，那么这个后面就要传递什么参数给我们的 `QTPlugin`，否则就会看到`Console`里打出找不到`xxx`定义或者`xxx.h`文件的错误。当然因为一般的编译指令，会有`-c`参数指定源文件，但是`--`后面并不需要，因为我们在`--`前面就指定了。`--`这种传参的方式还有另外一种方法，使用`-extra-arg="xxxx"`的方式指定编译参数，这样就不需要`--`了。
-> ```
+
+```
 -extra-arg="-Ixxxxxx"
 -extra-arg="-Fxxxxxx"
 -extra-arg="-isysroot xxxxxx"
