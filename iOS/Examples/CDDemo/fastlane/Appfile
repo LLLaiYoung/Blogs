@@ -1,0 +1,8 @@
+#The bundle identifier of your app
+app_identifier ENV['APP_IDENTIFIER']
+
+# Your Apple email address
+apple_id ENV['APPLE_ID'] 
+
+# Developer Portal Team ID
+team_id ENV['TEAM_ID']

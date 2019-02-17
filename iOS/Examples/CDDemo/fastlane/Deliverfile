@@ -1,0 +1,68 @@
+# app_identifier
+app_identifier ENV['APP_IDENTIFIER']
+
+# 用户名,Apple ID电子邮件地址
+username ENV['APPLE_ID']
+
+# 团队ID
+team_id ENV['TEAM_ID']
+
+# 团队name
+team_name ENV['TEAM_NAME']
+
+# copyright
+copyright ENV['COPYRIGHT']
+
+# 关键字
+# keywords(
+# 	'zh-Hans' => ENV['KEYWORDS'],
+# )
+
+# 新版本修改记录
+# release_notes(
+# 	# 中国
+# 	'zh-Hans' => ENV['RELEASE_NOTES'],
+# 	# 澳大利亚
+# 	#'en-au' => ENV['RELEASE_NOTES_AU'],
+# 	# 美国
+# 	#'en-us' => ENV['RELEASE_NOTES_US']
+# )
+
+# 支持网址
+# support_url(
+# 	# 中国
+# 	'zh-Hans' => ENV['SUPPORT_URL'],
+# 	# 澳大利亚
+# 	#'en-au' => ENV['SUPPORT_URL_AU'],
+# 	# 美国
+# 	#'en-us' => ENV['SUPPORT_URL_US']
+# )
+
+# 隐私政策网址 国家代码 https://www.cnblogs.com/Mien/archive/2008/08/22/1273950.html
+# privacy_url(
+# 	# 中国
+# 	'zh-Hans' => ENV['PRIVACY_URL'],
+# 	# 澳大利亚
+# 	#'en-au' => ENV['PRIVACY_URL_AU'],
+# 	# 美国
+# 	#'en-us' => ENV['PRIVACY_URL_US']
+# )
+
+# 上传完成后提交新版本进行审查
+submit_for_review false
+
+# 跳过HTML报告文件验证
+force true
+
+# 启用iTC的分阶段发布功能 灰度发布
+phased_release true
+
+# 应用审核小组的联系信息 app 审核信息
+app_review_information(
+  first_name: "xx",
+  last_name: "xx",
+  phone_number: "+86 18888888888",
+  email_address: "xxxx",
+  demo_user: "test1@test.com",
+  demo_password: "test123"
+)

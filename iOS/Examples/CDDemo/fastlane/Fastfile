@@ -1,0 +1,115 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# 解决 xcodebuild -showBuildSettings timed-out after 10 seconds and 3 retries. You can override the timeout value with the environment variable FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT, 
+# and the number of retries with the environment variable FASTLANE_XCODEBUILD_SETTINGS_RETRIES
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "180"
+ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "180"
+
+
+default_platform(:ios)
+
+platform :ios do
+
+	# private_lane 表示私有lane，使用'bundle exec fastlane'命令，Archive_TargetA lane是不是显示出来的。
+	private_lane :Archive_TargetA do |options|
+		scheme = options[:scheme]
+		date = Time.new.strftime("%Y%m%d-%h%M")
+		
+		# export_method 支持 app-store, ad-hoc, package, enterprise, development
+		gym(
+			scheme: "#{scheme}",
+			output_name: "#{scheme}-#{date}.ipa",
+			clean: true,
+			export_method: 'app-store',
+		)
+
+		# upload_to_app_store
+		deliver # 同 upload_to_app_store 作用一样
+	end
+
+	private_lane :Archive_TargetB do |options|
+		scheme = options[:scheme]
+		date = Time.new.strftime("%Y%m%d-%h%M")
+		
+		# export_method 支持 app-store, ad-hoc, package, enterprise, development
+		gym(
+			scheme: "#{scheme}",
+			output_name: "#{scheme}-#{date}.ipa",
+			clean: true,
+			export_method: 'app-store',
+		)
+
+		# upload_to_app_store
+		deliver # 同 upload_to_app_store 作用一样
+	end
+
+
+	lane :releaseTest do |options|
+		app_identidier = ENV['APP_IDENTIFIER'] # 这时候读取出来的'APP_IDENTIFIER'就是'com.targetA.CDTestDemo'，从'.env.TargetA'读取出来的
+
+		puts "这是app_identidier #{app_identidier}"
+
+		scheme = options[:scheme]
+
+		puts "scheme 是 #{scheme}"
+
+		parameter = options[:parameter]
+
+		puts "参数是 #{parameter}"
+
+		# # export_method 支持 app-store, ad-hoc, package, enterprise, development
+		# gym(
+		# 	scheme: "#{scheme}",
+		# 	output_name: "#{scheme}.ipa",
+		# 	clean: true,
+		# 	export_method: 'app-store',
+		# )
+
+		# deliver # 这时候deliverfile里面读取的内容就是从'.env.TargetA'文件读取的
+	end
+
+	#------------------------------传参------------------------------------------#
+
+	desc "通过options传参数"
+	lane :releaseDemo do  |options|
+		releaseTest(scheme: 'CDDemo')
+	end
+
+	desc "使用环境变量文件"
+	lane :releaseDemo2 do
+		sh "fastlane releaseTest --env TargetA"
+	end
+
+
+	desc "环境变量"
+	lane :releaseDemo3 do
+		sh "fastlane releaseTest parameter:\'12321哈哈\' --env TargetA"
+	end
+
+
+	#------------------------------打包统一入口------------------------------------------#
+
+    desc "打包统一入口"
+    lane :Archive do |options|
+		# 如果我们传入的参数'type'是targetA，那么我们就执行Archive_TargetA 这个lane。。。
+    	type = options[:type]
+      	if type == "TargetA"
+        	Archive_TargetA(options)
+      	elsif type == "TargetB"
+	        Archive_TargetB(options)
+    	else
+        	Archive_TargetA(options)
+      	end
+    end
+end
+
+
