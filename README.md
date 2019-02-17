@@ -8,3 +8,5 @@
 
 * [iOS 性能优化总结](https://github.com/CYBoys/Blogs/blob/master/iOS/ios-performance-optimization-summary.md)
 
+* [iOS 持续交付之 Fastlane](https://github.com/CYBoys/Blogs/blob/master/iOS/ios-fastlane.md)
+
