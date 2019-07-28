@@ -89,7 +89,7 @@
 **前提条件：**
 
 1. 立方体在前面，白色球体在立方体的后面。
-2. 立方体的 `Tags` 为 `{ "RenderType"="Transprant" "Queue" = "Transparent" }`
+2. 立方体的 `Tags` 为 `{ "RenderType"="Transprant" "Queue" = "Transparent" }`</br>
 白色球体的 `Tags` 为 `{ "RenderType"="Transprant" "Queue" = "Transparent+100" }`，`Queue`使用 `Transprant` 保证了 `立方体` 在 `Game` 视图中不为黑色，白色球体的 `Queue` 为 `Transparent+100` 保证了白色球体比立方体后渲染。
 
 **⚠️ 注意：下面是修改的立方体的 Shader ：**
@@ -125,7 +125,7 @@
 
 3. 假设贴图有一个半透明红色点 <img src="./Pic/1F0E0949-32F3-4D4B-81AD-AD6B5500D37E.jpg"> 
  `Color(1, 0, 0, 0.8)`，该点背景色为不透明蓝色 <img src="./Pic/07EACBD3-9938-43E9-A398-A85E6D3239A6.jpg">
- `Color(0, 0, 1, 1)`
+ `Color(0, 0, 1, 1)`。
 
 	`最终颜色 = (1, 0, 0) * 0.8 + (0, 0, 1) * (1 - 0.8) = (0.8, 0, 0.2)` <img src="./Pic/BC8C1D7F-4E86-4F62-9C49-CC1F6DA33FD8.jpg">
 
@@ -133,7 +133,7 @@
 
 	`最终颜色 = (1, 0, 0) * 0.2 + (0, 0, 1) * (1 - 0.2) = (0.2, 0, 0.8)`<img src="./Pic/973883FD-33FF-484D-80DA-E5AFB640C2C2.jpg">
 
- 结论：贴图 alpha 值越大，颜色越偏向贴图；alpha 值越小，颜色越偏向混合目标。
+	结论：贴图 alpha 值越大，颜色越偏向贴图；alpha 值越小，颜色越偏向混合目标。
 
 **参考文章:**
 
