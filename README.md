@@ -10,3 +10,7 @@
 
 * [iOS 持续交付之 Fastlane](https://github.com/CYBoys/Blogs/blob/master/iOS/ios-fastlane.md)
 
+## Shader
+
+* [Shader 之 Blend](https://github.com/CYBoys/Blogs/blob/master/Shader/Shader_Blend.md)
+

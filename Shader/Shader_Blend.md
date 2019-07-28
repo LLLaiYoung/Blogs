@@ -1,3 +1,5 @@
+# Shader 之 Blend
+
 ## Blend 是什么？
 
 > `Blending` is used to make transparent objects.
