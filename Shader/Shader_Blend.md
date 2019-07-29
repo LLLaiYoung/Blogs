@@ -77,8 +77,7 @@
 
 的分析，其中的 `生成的颜色` 是指 `fragment` 返回的结果，`屏幕上已有的颜色` 对应上面的 `pixel_color` 是指 `原本存在于缓冲区（GBuffer）`的颜色 。
 
-
-⚠️ 注意：`Blend` 共分为两个指令 `Blend` 和 `BlendOp`，如果用到了 `BlendOp` 那么 Unity 会自动忽略 `Blend` 指令。
+除去 `Blend` 参数，上述公式中的加号也是可以配置的，这个就是`BlendOp`。
 
 ## 常见 Blend 组合及效果
 
