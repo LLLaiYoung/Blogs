@@ -1,6 +1,8 @@
 ## FE
 
 - [深入解析 single-spa 微前端框架核心原理](./fe/深入解析%20single-spa%20微前端框架核心原理.md)
+- [fe-js-utils 使用手册](./fe/fe-js-utils%20使用手册.md)
+- [代码质量的“埃癸斯”：为什么你的项目需要这面更懂业务的 ESLint 神盾？](./fe/eslint-plugin-aegis.md)
 
 ## LLVM & Clang
 
